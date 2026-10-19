@@ -118,7 +118,7 @@
       <span class="counter" id="counter">–</span>
       <button id="nextBtn" class="secondary">Weiter ▶</button>
       <span style="flex:1"></span>
-      <button id="stepExportBtn" class="success" title="Aktuelle Anordnung als STEP-AP214-Assembly exportieren (jeder Würfel = ein Part)">
+      <button id="stepExportBtn" class="success" title="Aktuelle Anordnung exportieren">
         Diese Anordnung als STEP exportieren
       </button>
       <button id="excludeBtn" class="secondary" title="Regel hinzufügen, die genau diese Anordnung ausschließt">
@@ -225,7 +225,7 @@ function generate() {
   const shapes = genShapes(n);
   const estimated = shapes.length * FACT[n];
   if (estimated > MAX_STORE && !confirm(
-      `Bei ${n} Würfeln gibt es ca. ${estimated.toLocaleString("de-DE")} beschriftete Anordnungen. ` +
+      `Bei ${n} Komponenten gibt es ca. ${estimated.toLocaleString("de-DE")} beschriftete Anordnungen. ` +
       `Die Erzeugung kann einige Sekunden dauern und wird bei ${MAX_STORE.toLocaleString("de-DE")} gedeckelt. ` +
       `Tipp: Definiere zuerst Regeln, dann werden verbotene Anordnungen direkt übersprungen.\n\nTrotzdem fortfahren?`)) {
     return;
@@ -768,7 +768,7 @@ document.getElementById("addRuleBtn").onclick = () => {
   const b = parseInt(document.getElementById("ruleB").value,10);
   const rel = document.getElementById("ruleRel").value;
   const mode = document.getElementById("ruleMode").value;
-  if (a === b) { setStatus("Würfel A und B müssen unterschiedlich sein.", true); return; }
+  if (a === b) { setStatus("Komponente A und B müssen unterschiedlich sein.", true); return; }
   if (rules.some(r => r.a===a && r.b===b && r.rel===rel && r.mode===mode)) return;
   rules.push({a, b, rel, mode});
   renderRules();
